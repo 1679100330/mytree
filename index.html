@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="layui/css/layui.css">
+		<script type="text/javascript" src="layui/layui.js"></script>
+	</head>
+	<body>
+		<div class="layui-container">
+			<form class="layui-form" action="" lay-filter="example">
+				<div id="gw-tree"></div>
+				<button class="layui-btn" type="submit" lay-submit lay-filter="save">提交</button>
+			</form>
+			<button id="btn">按鈕</button>
+		</div>		
+	</body>
+<script type="text/javascript">
+	layui.config({
+		base: 'extends/',
+	}).extend({
+		authtree: 'mytree',
+	});
+	layui.use(['jquery', 'mytree', 'form'], function(){
+		var $ = layui.jquery;
+		var mytree = layui.mytree;
+		var form = layui.form;
+		
+		var nodes = [
+				{"id":"1000","pid":"1001","name":"菜單","icon":"","url":"#"},
+				{"id":"1001","pid":"#","name":"名称","icon":"icon-music","url":"#"},
+				{"id":"1002","pid":"#","name":"名称","icon":"icon-music","url":"#"},
+				{"id":"1003","pid":"1001","name":"名称","icon":"icon-music","url":"#"},
+				{"id":"1004","pid":"1001","name":"名称","icon":"icon-music","url":"#"},
+				{"id":"1005","pid":"1002","name":"名称","icon":"icon-music","url":"#"},
+				{"id":"1006","pid":"1004","name":"名称","icon":"icon-music","url":"#"},
+				{"id":"abc","pid":"1004","name":"名称","icon":"icon-music","url":"#"},
+				{"id":"1008","pid":"1003","name":"名称","icon":"icon-music","url":"#"},
+				{"id":"1009","pid":"1003","name":"名称","icon":"icon-music","url":"#"},
+				{"id":"1010","pid":"abc","name":"名称","icon":"icon-music","url":"#"},
+				{"id":"1011","pid":"abc","name":"名称","icon":"icon-music","url":"#"},
+				{"id":"1012","pid":"1003","name":"名称","icon":"icon-music","url":"#"},
+				{"id":"1013","pid":"1003","name":"名称","icon":"icon-music","url":"#"},
+				{"id":"1014","pid":"1003","name":"名称","icon":"icon-music","url":"#"},
+				{"id":"1015","pid":"1014","name":"名称","icon":"icon-music","url":"#"},
+				{"id":"1016","pid":"1014","name":"名称","icon":"icon-music","url":"#"},
+				{"id":"1017","pid":"1014","name":"名称","icon":"icon-music","url":"#"}
+			];
+		
+		mytree.render('gw-tree', nodes,function(res){
+			console.log(res);
+		});
+		
+		var btn = document.getElementById('btn');
+		btn.onclick=function(){
+			console.log(mytree.getChecked('gw-tree'));
+		}	
+		form.on('submit(save)', function(data){
+			console.log(mytree.getChecked('gw-tree'));
+			return false;
+		});
+	});
+</script>
+</html>
